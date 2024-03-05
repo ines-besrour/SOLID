@@ -1,0 +1,49 @@
+
+@startuml ISP
+
+
+
+interface IProximity {
+    + proximityCallback(): void 
+}
+
+interface ITimeout {
+    + timeOutCallback(): void 
+}
+
+class SensingDoor {
+    - boolean _locked
+    - boolean _opened
+}
+
+class TimedDoor {
+    - _locked : boolean
+    - _opened : boolean
+    - TIME_OUT: int = 100
+    + TimedDoor(Timer timer)
+}
+class Timer {
+    + register(long timeOut, ITimeout timeout): void
+}
+
+
+class Sensor {
+    + register(IProximity proximity): void 
+    + isPersonClose(): boolean 
+}
+
+interface Door {
+    + lock(): void 
+    + unlock(): void 
+    + open(): void 
+    + close(): void  
+}
+
+SensingDoor ..|> Door
+SensingDoor ..|> IProximity
+TimedDoor ..|> Door
+TimedDoor ..|> ITimeout
+TimedDoor ..> Timer
+Sensor ..> IProximity
+Timer ..> ITimeout
+
