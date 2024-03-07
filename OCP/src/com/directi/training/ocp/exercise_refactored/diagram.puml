@@ -1,0 +1,24 @@
+@startuml
+
+interface ResourceAllocator {
+    +allocate(): int
+    +free(int): void
+}
+
+class TimeSlotResourceAllocator {
+    -INVALID_RESOURCE_ID: int
+    +allocate(): int
+    +free(int): void
+}
+
+class SpaceSlotResourceAllocator {
+    -INVALID_RESOURCE_ID: int
+    +allocate(): int
+    +free(int): void
+}
+
+
+ResourceAllocator <|.. TimeSlotResourceAllocator
+ResourceAllocator <|.. SpaceSlotResourceAllocator
+
+@enduml
