@@ -1,0 +1,26 @@
+
+@startuml DIP
+
+interface IDatabase {
+    + write(String inputString): int
+}
+
+class EncodingModule {
+    + encodeWithFiles(): void 
+    + encodeBasedOnNetworkAndDatabase(): void 
+}
+
+class MyDatabase {
+    -  static _data : Map<Integer, String> 
+    -  static _count : int  = 0
+    + write(String inputString): int
+}
+
+class EncodingModuleClient {
+    + main(String[] args) : void
+}
+
+
+EncodingModule -> IDatabase
+EncodingModuleClient -> EncodingModule
+MyDatabase ..|> IDatabase
